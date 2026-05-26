@@ -1,0 +1,176 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+
+@import "tailwindcss";
+
+/* Custom color */
+/* Added inline tells Tailwind to emit the value directly into the utility 
+class instead of referencing the CSS variable, so it can't be overridden at the variable level. */
+@theme inline {
+  --color-secondary: #934842;
+  --color-on-primary-fixed: #410007;
+  --color-on-primary: #ffffff;
+  --color-secondary-fixed-dim: #ffb4ac;
+  --color-outline: #887271;
+  --color-inverse-primary: #ffb3b1;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-tertiary: #ffffff;
+  --color-on-secondary-fixed-variant: #75312c;
+  --color-on-primary-fixed-variant: #7f292c;
+  --color-surface-container-high: #ffe3cc;
+  --color-inverse-surface: #422c15;
+  --color-on-surface-variant: #554241;
+  --color-primary-fixed-dim: #ffb3b1;
+  --color-surface-variant: #ffdcbe;
+  --color-tertiary-fixed: #ffdad3;
+  --color-secondary-container: #fe9f96;
+  --color-inverse-on-surface: #ffeee0;
+  --color-on-surface: #2a1704;
+  --color-surface-dim: #f8d3b3;
+  --color-surface-container: #ffeada;
+  --color-primary-fixed: #ffdad8;
+  --color-on-tertiary-fixed-variant: #6d382d;
+  --color-on-background: #2a1704;
+  --color-tertiary-fixed-dim: #ffb4a4;
+  --color-on-secondary-container: #79342e;
+  --color-surface-bright: #fff8f5;
+  --color-primary-container: #f08080;
+  --color-on-tertiary-fixed: #370e06;
+  --color-error: #ba1a1a;
+  --color-on-secondary-fixed: #3c0706;
+  --color-tertiary-container: #d68f80;
+  --color-outline-variant: #dbc0bf;
+  --color-on-primary-container: #6a1a1f;
+  --color-surface-tint: #9d4042;
+  --color-surface-container-highest: #ffdcbe;
+  --color-background: #fff8f5;
+  --color-secondary-fixed: #ffdad6;
+  --color-on-tertiary-container: #5a291f;
+  --color-error-container: #ffdad6;
+  --color-tertiary: #894f42;
+  --color-primary: #9d4042;
+  --color-surface-container-low: #fff1e7;
+  --color-surface: #fff8f5;
+  --color-on-error-container: #93000a;
+  --color-on-error: #ffffff;
+  --color-on-secondary: #ffffff;
+}
+
+/* Global base styles */
+:root {
+  font-family: "Short Stack", cursive;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    font-size: 16px;
+  }
+}
+/* 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --bg: #212227;
+    --border: #2e303a;
+    --code-bg: #1f2028;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+} */
+
+/* #root {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+} */
+
+body {
+  margin: 0;
+}
+
+/* h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+} */
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+@keyframes moveGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient {
+  background: radial-gradient(circle, #f08080, #ffdad6);
+  /* background: radial-gradient(circle, #7182ff, #3cff52); */
+  background-size: 300% 300%; /* oversized so movement is visible */
+  animation: moveGradient 3s ease-in-out infinite alternate;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 0.2em; /* gives descenders room to breathe */
+  display: inline-block;
+}
+
+.hero-gradient {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 248, 245, 0) 0%,
+    rgba(255, 248, 245, 1) 100%
+  );
+}
