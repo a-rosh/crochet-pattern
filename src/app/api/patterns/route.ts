@@ -1,24 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/src/app/lib/prisma";
 
-// GET /api/patterns — fetch all patterns (with optional filters)
-export async function GET(req: NextRequest) {
+// GET /api/patterns
+export async function GET() {
   try {
-    const { searchParams } = new URL(req.url);
-    const status = searchParams.get("status");
-    const category = searchParams.get("category");
-
     const patterns = await prisma.pattern.findMany({
-      where: {
-        ...(status && { status }),
-        ...(category && { category }),
-      },
       orderBy: { createdAt: "desc" },
     });
-
+    console.log("patterns", patterns);
     return NextResponse.json(patterns);
   } catch (error) {
-    console.error("[GET /api/patterns]", error);
     return NextResponse.json(
       { error: "Failed to fetch patterns" },
       { status: 500 },
@@ -26,7 +17,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// POST /api/patterns — create a new pattern
+// POST /api/patterns
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -34,9 +25,7 @@ export async function POST(req: NextRequest) {
       name,
       description,
       pattern,
-      status,
       totalRows,
-      currentRow,
       hookSize,
       category,
       imageUrl,
@@ -44,9 +33,9 @@ export async function POST(req: NextRequest) {
       notes,
     } = body;
 
-    if (!name || !pattern) {
+    if (!name || !pattern || !totalRows || !category) {
       return NextResponse.json(
-        { error: "name and pattern are required" },
+        { error: "name, pattern, totalRows and category are required" },
         { status: 400 },
       );
     }
@@ -56,9 +45,7 @@ export async function POST(req: NextRequest) {
         name,
         description,
         pattern,
-        status: status ?? "active",
         totalRows,
-        currentRow: currentRow ?? 0,
         hookSize,
         category,
         imageUrl,
@@ -69,7 +56,6 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(newPattern, { status: 201 });
   } catch (error) {
-    console.error("[POST /api/patterns]", error);
     return NextResponse.json(
       { error: "Failed to create pattern" },
       { status: 500 },
